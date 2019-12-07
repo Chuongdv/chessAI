@@ -159,6 +159,7 @@ class GUI(Frame):
         position = self.YIELD[self.coordinateClick[0]] + str(self.coordinateClick[1])
         print (position)
         legal_moves =[str(legal_move) for legal_move in self.board.legal_moves]
+        print(legal_moves)
         self.listHightLight.clear()
         self.mapHightLight.clear()
         for legal_move in legal_moves:
@@ -173,6 +174,17 @@ class GUI(Frame):
     def move(self):
         self.clickTo = self.YIELD[self.coordinateClick[0]] + str(self.coordinateClick[1])
         move = str(self.clickfrom) + str(self.clickTo)
+        #check promotion
+        traceFrom = self.MAP[self.clickfrom[0]] + (self.NUMBER_ROW) * (int(self.clickfrom[1]) - 1)
+        traceFrom = self.board.piece_at(traceFrom)
+        print("trace" + str(traceFrom.symbol()))
+        print(self.clickTo[1])
+        print(traceFrom.symbol() == 'p' )
+        if traceFrom.symbol() == 'p' and int(self.clickTo[1]) == 1:
+            move += 'q'
+        elif traceFrom.symbol() == 'P' and int(self.clickTo[1]) == 8:
+            move += 'q'
+            print("hihi")
         move = chess.Move.from_uci(move)
         self.board.push(move)
         self.mapHightLight.clear()

@@ -7,7 +7,7 @@ class Game:
 
     ROOT = Tk()
     ROOT.title("SearchRed")
-    BOARD = chess.Board("rnbqkbnr/1ppppppp/8/8/8/8/1PPPPPPP/R3K2R w KQkq - 0 1")
+    BOARD = chess.Board("rnbqkbnr/1ppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
     MYCOLLOR = None
     MACHINECOLLOR = None
     #luot choi
