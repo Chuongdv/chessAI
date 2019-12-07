@@ -144,9 +144,14 @@ class GUI(Frame):
                 if pieceAt is not None:
                     self.clickfrom = self.YIELD[self.coordinateClick[0]] + str(self.coordinateClick[1])
                     self.hightLight()
+                else:
+                    self.draw()
             else:
                 if traceSquare in self.mapHightLight:
                     self.move()
+                else:
+                    self.mapHightLight.clear()
+                    self.draw()
                 self.clickfrom = None
 
 
@@ -166,9 +171,12 @@ class GUI(Frame):
         self.draw()
 
     def move(self):
-        self.clickfrom = self.YIELD[self.coordinateClick[0]] + str(self.coordinateClick[1])
-        move = str(self.clickTo) + str(self.clickfrom)
-        print(move)
+        self.clickTo = self.YIELD[self.coordinateClick[0]] + str(self.coordinateClick[1])
+        move = str(self.clickfrom) + str(self.clickTo)
+        move = chess.Move.from_uci(move)
+        self.board.push(move)
+        self.mapHightLight.clear()
+        self.draw()
 
     def draw(self):
         collor = self.WHITE
@@ -215,6 +223,3 @@ class GUI(Frame):
             if (pieceAtSquare is not None):
                 image = pieceAtSquare.symbol()
                 self.GUIBoard.create_image(self.SIZE_SQUARE // 2 + self.square[i][0],self.SIZE_SQUARE // 2 + self.square[i][1], image = self.piece[image], tag = "piece")
-
-        #self.GUIBoard.tag_raise("piece")
-        #self.GUIBoard.tag_lower("square")
