@@ -1,0 +1,6 @@
+environment
+python 3x
+ide pycharm community
+package chess-python
+package Pillow
+
