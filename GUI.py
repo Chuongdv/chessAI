@@ -30,67 +30,67 @@ class GUI(Frame):
         self.piece = {}
 
         #king
-        self.icon = Image.open("data/image/K.png")
+        self.icon = Image.open("data/image/white/K.png")
         self.icon = self.icon.resize((self.SIZE_SQUARE, self.SIZE_SQUARE))
         self.icon = ImageTk.PhotoImage(self.icon)
         self.piece['K'] = self.icon
 
-        self.icon = Image.open("data/image/k.png")
+        self.icon = Image.open("data/image/black/k.png")
         self.icon = self.icon.resize((self.SIZE_SQUARE, self.SIZE_SQUARE))
         self.icon = ImageTk.PhotoImage(self.icon)
         self.piece['k'] = self.icon
 
         #Queen
-        self.icon = Image.open("data/image/Q.png")
+        self.icon = Image.open("data/image/white/Q.png")
         self.icon = self.icon.resize((self.SIZE_SQUARE, self.SIZE_SQUARE))
         self.icon = ImageTk.PhotoImage(self.icon)
         self.piece['Q'] = self.icon
 
-        self.icon = Image.open("data/image/q.png")
+        self.icon = Image.open("data/image/black/q.png")
         self.icon = self.icon.resize((self.SIZE_SQUARE, self.SIZE_SQUARE))
         self.icon = ImageTk.PhotoImage(self.icon)
         self.piece['q'] = self.icon
 
         #Rook
-        self.icon = Image.open("data/image/R.png")
+        self.icon = Image.open("data/image/white/R.png")
         self.icon = self.icon.resize((self.SIZE_SQUARE, self.SIZE_SQUARE))
         self.icon = ImageTk.PhotoImage(self.icon)
         self.piece['R'] = self.icon
 
-        self.icon = Image.open("data/image/r.png")
+        self.icon = Image.open("data/image/black/r.png")
         self.icon = self.icon.resize((self.SIZE_SQUARE, self.SIZE_SQUARE))
         self.icon = ImageTk.PhotoImage(self.icon)
         self.piece['r'] = self.icon
 
         #Bishop
-        self.icon = Image.open("data/image/B.png")
+        self.icon = Image.open("data/image/white/B.png")
         self.icon = self.icon.resize((self.SIZE_SQUARE, self.SIZE_SQUARE))
         self.icon = ImageTk.PhotoImage(self.icon)
         self.piece['B'] = self.icon
 
-        self.icon = Image.open("data/image/b.png")
+        self.icon = Image.open("data/image/black/b.png")
         self.icon = self.icon.resize((self.SIZE_SQUARE, self.SIZE_SQUARE))
         self.icon = ImageTk.PhotoImage(self.icon)
         self.piece['b'] = self.icon
 
         #Knight
-        self.icon = Image.open("data/image/N.png")
+        self.icon = Image.open("data/image/white/N.png")
         self.icon = self.icon.resize((self.SIZE_SQUARE, self.SIZE_SQUARE))
         self.icon = ImageTk.PhotoImage(self.icon)
         self.piece['N'] = self.icon
 
-        self.icon = Image.open("data/image/n.png")
+        self.icon = Image.open("data/image/black/n.png")
         self.icon = self.icon.resize((self.SIZE_SQUARE, self.SIZE_SQUARE))
         self.icon = ImageTk.PhotoImage(self.icon)
         self.piece['n'] = self.icon
 
         #Pawn
-        self.icon = Image.open("data/image/P.png")
+        self.icon = Image.open("data/image/white/P.png")
         self.icon = self.icon.resize((self.SIZE_SQUARE, self.SIZE_SQUARE))
         self.icon = ImageTk.PhotoImage(self.icon)
         self.piece['P'] = self.icon
 
-        self.icon = Image.open("data/image/p.png")
+        self.icon = Image.open("data/image/black/p.png")
         self.icon = self.icon.resize((self.SIZE_SQUARE, self.SIZE_SQUARE))
         self.icon = ImageTk.PhotoImage(self.icon)
         self.piece['p'] = self.icon
@@ -121,17 +121,21 @@ class GUI(Frame):
         self.listHightLight = []
         self.mapHightLight = []
 
+        #control panel
         self.controlPanel = Frame(self, width=300, background='yellow')
         self.controlPanel.pack(side=tkinter.RIGHT, expand=True, fill=tkinter.Y)
         self.buttonNewMatch = Button(self.controlPanel, text="new match",background="white")
 
         self.buttonNewMatch.place(relx = .2, rely = .5, anchor = 'c')
 
+        #status bar
+        self.statusBar = tkinter.Frame(self, height=32)
+        self.statusBar.pack(side=tkinter.BOTTOM)
         self.draw()
 
 
     def click(self, event):
-        #if self.slot[0] == True:
+        if self.slot[0] == True or self.slot[0] == False:
             x = event.x // self.SIZE_SQUARE
             y = self.NUMBER_ROW - event.y // self.SIZE_SQUARE
             self.coordinateClick.clear()
@@ -191,6 +195,9 @@ class GUI(Frame):
         self.draw()
 
     def draw(self):
+        #delete canvas
+        self.GUIBoard.delete("square")
+        self.GUIBoard.delete("piece")
         collor = self.WHITE
         positonClick = None
         if len(self.coordinateClick):
