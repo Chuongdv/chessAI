@@ -35,12 +35,13 @@ class Game:
             self.display.canvas.create_text(20, 220, anchor='w', font="VNI-Dom 14",
                                             text="Status board: Draw", tag="status")
         else:
-            machineMove = source.AI.makeBestMove(3, self.BOARD, True)
-            move = chess.Move.from_uci(machineMove)
-            self.BOARD.push(move)
-            self.display.canvas.delete("move")
-            self.display.canvas.create_text(20, 150, anchor='w', font="VNI-Dom 14",
-                                    text="Black move: " + str(move), tag="move")
+            if(self.SLOT[0] == False):
+                machineMove = source.AI.makeBestMove(3, self.BOARD, True)
+                move = chess.Move.from_uci(machineMove)
+                self.BOARD.push(move)
+                self.display.canvas.delete("move")
+                self.display.canvas.create_text(20, 150, anchor='w', font="VNI-Dom 14",
+                                        text="Black move: " + str(move), tag="move")
             #print(self.BOARD)
             self.display.draw()
             if (self.BOARD.is_checkmate()):

@@ -143,8 +143,11 @@ class GUI(Frame):
 
     def clearBoard(self, event):
         self.board.reset()
-        self.draw()
         self.slot[0] = True
+        self.canvas.delete("move")
+        self.canvas.create_text(20, 150, anchor='w', font="VNI-Dom 14",
+                           text="Oponent move: ", tag = "move")
+        self.draw()
 
 
     def click(self, event):
@@ -210,6 +213,7 @@ class GUI(Frame):
         self.canvas.delete("status")
         self.canvas.create_text(20, 220, anchor='w', font="VNI-Dom 14",
                            text="Status board: Machine turn", tag = "status")
+
         self.game.ROOT.after(1000, self.game.AIplay)
 
     def draw(self):
