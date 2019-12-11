@@ -201,7 +201,7 @@ class GUI(Frame):
         elif traceFrom.symbol() == 'P' and int(self.clickTo[1]) == 8:
             move += 'q'
 
-        print(move)
+        #print(move)
         move = chess.Move.from_uci(move)
         self.board.push(move)
         self.mapHightLight.clear()

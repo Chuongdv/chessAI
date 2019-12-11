@@ -16,12 +16,13 @@ def makeBestMove(depth, game, isMaximisingPlayer):
 
 
 def experienceMove(game):
-    with chess.polyglot.open_reader("../data/opening/opening.bin") as reader:
+    with chess.polyglot.open_reader("../data/opening/proDeo.bin") as reader:
         opening_moves = [
             str(entry.move) for entry in reader.find_all(game)
         ];
         if opening_moves:
             for move in opening_moves:
+
                 return move
         else:
             return None
