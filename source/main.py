@@ -11,20 +11,24 @@ class Game:
     ROOT.title("SearchRed")
     BOARD = chess.Board()
     #luot choi
+    #true la luot nguoi choi, false là lượt máy chơi
     SLOT = [True]
 
     #khoi tao giao dien, luot choi
     def __init__(self):
         self.display = GUI(self, self.ROOT, self.BOARD, self.SLOT)
         self.display.pack()
-
+    #bắt đầu game
     def start(self):
         if(self.SLOT[0] == False):
             self.AIplay()
         self.ROOT.mainloop()
+
+    #máy chơi
     def AIplay(self):
-        #check mate
+        #kiểm tra kết thuc ván đấu bao gồm thắng, thua, hòa
         if(self.BOARD.is_checkmate()):
+            #cap nhat trạng thái ván đấu
             messagebox.showwarning("End game", "You win")
             self.display.canvas.delete("status")
             self.display.canvas.create_text(20, 220, anchor='w', font="VNI-Dom 14",
@@ -35,7 +39,9 @@ class Game:
             self.display.canvas.create_text(20, 220, anchor='w', font="VNI-Dom 14",
                                             text="Status board: Draw", tag="status")
         else:
+            #kiem tra co phai luot di cua may
             if(self.SLOT[0] == False):
+            #sinh nuoc di vói modul AI với độ sâu 3
                 machineMove = source.AI.makeBestMove(3, self.BOARD, True)
                 move = chess.Move.from_uci(machineMove)
                 self.BOARD.push(move)
@@ -44,6 +50,8 @@ class Game:
                                         text="Black move: " + str(move), tag="move")
             #print(self.BOARD)
             self.display.draw()
+
+            #kiem tra ket qua van dau sau khi move
             if (self.BOARD.is_checkmate()):
                 messagebox.showwarning("End game", "Machine win")
                 self.display.canvas.delete("status")
@@ -61,6 +69,6 @@ class Game:
                                         text="Status board: Your turn", tag="status")
 
 
-
+#bat dau game
 game = Game()
 game.start()

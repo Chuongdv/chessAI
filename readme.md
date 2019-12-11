@@ -1,5 +1,6 @@
 # Tài liệu hướng dẫn sử dụng chương trình chess AI
->**Game được phát triển bởi Đỗ Văn Chưởng và Trịnh Thành Công trong môn học trí tuệ nhân tạo IT4040**
+>**Game được phát triển bởi Đỗ Văn Chưởng và Trịnh Thành Công trong môn học trí tuệ nhân tạo IT4040**  
+**Inspired by [yachess](https://github.com/devinalvaro/yachess)  [A step-by-step guide to building a simple chess AI](https://www.freecodecamp.org/news/simple-chess-ai-step-by-step-1d55a9266977/)**
 ## 1. Hướng dẫn cài đặt
 ### Các công cục cần cài đặt bao gồm
 1. [python 3.8](https://www.python.org/downloads/)

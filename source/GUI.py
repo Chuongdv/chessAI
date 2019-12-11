@@ -28,7 +28,7 @@ class GUI(Frame):
         super().__init__(root)
         #data
         self.piece = {}
-
+        # lấy hình ảnh các quân cờ
         #king
         self.icon = Image.open("../data/image/white/K.png")
         self.icon = self.icon.resize((self.SIZE_SQUARE, self.SIZE_SQUARE))
@@ -103,25 +103,29 @@ class GUI(Frame):
                 self.square.append([j*self.SIZE_SQUARE, offsetRank - i*self.SIZE_SQUARE])
 
 
-
+        #vẽ khung bàn cờ
         BoardHeight = self.NUMBER_ROW * self.SIZE_SQUARE
         BoardWith = self.NUMBER_COLLUM * self.SIZE_SQUARE
         self.GUIBoard = Canvas(self, width= BoardWith, height= BoardHeight, background='gray')
 
         self.GUIBoard.pack(side= tkinter.LEFT)
 
+        #gán sự kiện click cho bàn cờ
         self.GUIBoard.bind('<Button-1>', self.click)
         self.clickfrom = None
         self.clickTo = None
+        #biến lưu tọa độ của điểm click
         self.coordinateClick = []
+        #biến lưu danh sách nước đi gợi ý
         self.listHightLight = []
         self.mapHightLight = []
         self.draw()
 
-        #infomation
+        #thanh lưu thông tin ván đấu và chức năng new game
         self.controlPanel = Frame(self, width= 300, background = "#d2f0bb")
         self.controlPanel.pack(side=tkinter.LEFT, fill = tkinter.BOTH)
 
+        #in trạng thái ván đấu
         self.canvas = Canvas(self.controlPanel, background = 'white', height = 256)
         self.canvas.create_text(20, 30, anchor='w', font="VNI-Dom 16",
                            text="Information of game")
@@ -139,8 +143,10 @@ class GUI(Frame):
 
         self.ButtonNewgame = tkinter.Button(self.controlPanel, text = "New game", width = 10, font="VNI-Dom 14", background = "#1698de")
         self.ButtonNewgame.place(relx = .5, rely = .7, anchor ='c')
+        #GÁN sự kiện click button new game
         self.ButtonNewgame.bind('<Button-1>', self.clearBoard)
 
+    #setup lại bàn cờ mới
     def clearBoard(self, event):
         self.board.reset()
         self.slot[0] = True
@@ -151,16 +157,15 @@ class GUI(Frame):
 
 
     def click(self, event):
+        #kiểm tra lượt chơi
         if self.slot[0] == True:
-            # check mate
-
-
                 x = event.x // self.SIZE_SQUARE
                 y = self.NUMBER_ROW - event.y // self.SIZE_SQUARE
                 self.coordinateClick.clear()
                 self.coordinateClick.append(x)
                 self.coordinateClick.append(y)
                 traceSquare = (self.NUMBER_ROW - 1 - event.y // self.SIZE_SQUARE)*self.NUMBER_ROW + (event.x // self.SIZE_SQUARE)
+                #gợi ý nước đi, thực hiện move
                 if self.clickfrom is None:
                     pieceAt = self.board.piece_at(traceSquare)
                     if pieceAt is not None:
@@ -176,6 +181,7 @@ class GUI(Frame):
                         self.draw()
                     self.clickfrom = None
 
+#tô sáng những ô gợi ý
     def hightLight(self):
         position = self.YIELD[self.coordinateClick[0]] + str(self.coordinateClick[1])
         legal_moves =[str(legal_move) for legal_move in self.board.legal_moves]
@@ -189,6 +195,7 @@ class GUI(Frame):
 
         self.draw()
 
+#thực hiện đi quân
     def move(self):
         self.clickTo = self.YIELD[self.coordinateClick[0]] + str(self.coordinateClick[1])
         move = str(self.clickfrom) + str(self.clickTo)
@@ -216,6 +223,7 @@ class GUI(Frame):
 
         self.game.ROOT.after(1000, self.game.AIplay)
 
+#vẽ bàn cờ
     def draw(self):
         #delete canvas
         self.GUIBoard.delete("square")

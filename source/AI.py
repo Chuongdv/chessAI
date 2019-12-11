@@ -5,6 +5,8 @@ import source.table
 
 import chess.polyglot
 
+from source import table
+
 isExistInOpeningBook = True;
 
 def makeBestMove(depth, game, isMaximisingPlayer):
@@ -83,6 +85,26 @@ def evaluateBoard(game):
     return totalEvaluation;
 
 
+def isEndgame(game):
+    for square in chess.SQUARES:
+        if isHeavyPiece(game, square):
+            return False
+
+    return True
+
+
+
+def isHeavyPiece(game, square):
+    piece = game.piece_at(square)
+    if piece is None:
+        return False
+    if piece.symbol().lower() == 'q' or piece.symbol().lower() == 'r':
+        return True
+    else:
+        return False
+
+
+
 def getPieceValue(game, square):
     piece = game.piece_at(square);
     if piece is None:
@@ -102,7 +124,11 @@ def getPieceValue(game, square):
         elif piece.symbol().lower() == 'q':
             return 900 + source.table.evalQueen[row][col];
         elif piece.symbol().lower() == 'k':
-            return 20000 + (source.table.kingEvalWhite[row][col] if isWhite else source.table.kingEvalBlack[row][col]);
+            if isEndgame(game):
+                return 20000 + (table.KingWhiteEndgame[row][col] if isWhite else table.KingBlackEndgame[row][col]);
+            else:
+                return 20000 + (table.kingEvalWhite[row][col] if isWhite else table.kingEvalBlack[row][col]);
+
 
     absoluteValue = getAbsoluteValue(piece, game.color_at(square), square);
 
