@@ -1,4 +1,5 @@
 # Tài liệu hướng dẫn sử dụng chương trình chess AI
+>**Game được phát triển bởi Đỗ Văn Chưởng và Trịnh Thành Công trong môn học trí tuệ nhân tạo IT4040**
 ## 1. Hướng dẫn cài đặt
 ### Các công cục cần cài đặt bao gồm
 1. [python 3.8](https://www.python.org/downloads/)
@@ -12,6 +13,7 @@
     Package này được cài đặt mặc định kèm theo python 3.7 rồi nên không cần chạy lệnh cài đặt  
 ## 2. Hướng dẫn sử dụng
 ###Giao diện sau khi chạy chương trình
+**Chương trình bắt đầu chạy từ file source/main.py**
  ![Giao diện bắt đầu](intro/fullgame.PNG)  
  
  Chương trình có thể chạy trên các nền tảng windows, Linux, Mac  
@@ -28,7 +30,7 @@
  2. Thông tin về độ sâu của thuật giải alpha beta pruning cho AI (ở đây là độ sâu mức 3)
  3. Lịch sử nước đi (ở đây quân trắng vừa đánh nước đi a2a4)
  4. Lượt chơi (ở đây đang là lượt chơi của máy)
-## 4. Hướng dẫn chơi cờ vua
+## 3. Hướng dẫn chơi cờ vua
    Nếu bạn chưa biết chơi cờ vua có thể tham khảo link sau    
    [Rule of chess](https://en.wikipedia.org/wiki/Rules_of_chess)  
    Mô tả bàn cờ quốc tế trên máy tính như sau 
